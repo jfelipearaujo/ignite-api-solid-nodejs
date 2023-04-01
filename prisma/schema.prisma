@@ -11,9 +11,35 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  create_at     DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   @@map("users")
+}
+
+model Gym {
+  id String @id @default(uuid())
+
+  title       String
+  description String?
+  phone       String?
+  latitude    Decimal
+  longitude   Decimal
+  create_at   DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("gyms")
+}
+
+model CheckIn {
+  id          String    @id @default(uuid())
+  validate_at DateTime?
+  create_at   DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  @@map("check_ins")
 }
