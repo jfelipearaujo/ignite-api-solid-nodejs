@@ -55,7 +55,7 @@ describe('RegisterUseCase', () => {
         });
 
         // Act + Assert
-        expect(() => 
+        await expect(() => 
             sut.execute({
                 name: 'John Doe',
                 email,

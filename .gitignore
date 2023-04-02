@@ -4,3 +4,6 @@ build
 
 # Environment variables
 .env
+
+# Tests
+coverage
