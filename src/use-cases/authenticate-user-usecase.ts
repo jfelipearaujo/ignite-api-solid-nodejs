@@ -3,21 +3,21 @@ import { compare } from 'bcryptjs';
 import { InvalidCredentialsError } from './errors/invalid-credentials.error';
 import { User } from '@prisma/client';
 
-interface AuthenticateUseCaseRequest {
+interface AuthenticateUserUseCaseRequest {
     email: string;
     password: string;
 }
 
-interface AuthenticateUseCaseResponse {
+interface AuthenticateUserUseCaseResponse {
     user: User;
 }
 
-export class AuthenticateUseCase {
+export class AuthenticateUserUseCase {
     constructor(
         private userRepository: UserRepository,
     ) {}
 
-    async execute({email, password}: AuthenticateUseCaseRequest) : Promise<AuthenticateUseCaseResponse> {
+    async execute({email, password}: AuthenticateUserUseCaseRequest) : Promise<AuthenticateUserUseCaseResponse> {
         const user = await this.userRepository.findOneByEmail(email);
 
         if(!user) {

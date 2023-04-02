@@ -1,6 +1,6 @@
 @url=http://localhost:3333
 
-###
+### Register a new user
 POST {{url}}/users
 Content-Type: application/json
 
@@ -8,4 +8,13 @@ Content-Type: application/json
     "name":"John Doe",
     "email":"john.doe@email.com",
     "password":"123456"
+}
+
+### Register a new session
+POST {{url}}/sessions
+Content-Type: application/json
+
+{
+    "email":"john.doe@email.com",
+    "password":"1234567"
 }
