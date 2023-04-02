@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import {FastifyRequest, FastifyReply} from 'fastify';
 import { RegisterUserUseCase } from '@/use-cases/register-user';
-import { PrismaUsersRepository } from '@/repositories/prisma-users-repository';
+import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository';
 
 export async function registerUser(request:FastifyRequest, reply: FastifyReply) {
     const registerUserSchema = z.object({

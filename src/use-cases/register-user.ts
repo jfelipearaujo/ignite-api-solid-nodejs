@@ -1,3 +1,4 @@
+import { UsersRepository } from '@/repositories/users-repository';
 import { hash } from 'bcryptjs';
 
 interface RegisterUser {
@@ -7,7 +8,7 @@ interface RegisterUser {
 }
 
 export class RegisterUserUseCase {
-    constructor(private usersRepository: any) {}
+    constructor(private usersRepository: UsersRepository) {}
 
     async execute ({ name, email, password }: RegisterUser) {
         const userWithSameEmail = await this.usersRepository.findOneByEmail(email);
