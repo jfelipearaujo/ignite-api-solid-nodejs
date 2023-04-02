@@ -15,3 +15,15 @@ if (parseResult.success === false) {
 }
 
 export const env = parseResult.data;
+
+export function isDevelopment() {
+    return env.NODE_ENV === 'dev';
+}
+
+export function isTest() {
+    return env.NODE_ENV === 'test';
+}
+
+export function isProduction() {
+    return env.NODE_ENV === 'prod';
+}
