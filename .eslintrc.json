@@ -4,10 +4,9 @@
         "node": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "standard",
+        "plugin:prettier/recommended"
     ],
-    "overrides": [],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -17,23 +16,29 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "camelcase": "off",
         "no-useless-constructor": "off",
         "indent": [
             "error",
             4
         ],
-        "linebreak-style": [
+        "prettier/prettier": [
             "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
+            {
+                "printWidth": 80,
+                "tabWidth": 4,
+                "singleQuote": false,
+                "trailingComma": "all",
+                "arrowParens": "always",
+                "semi": true,
+                "endOfLine": "auto"
+            }
         ]
+    },
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [
+                ".ts"
+            ]
+        }
     }
 }
