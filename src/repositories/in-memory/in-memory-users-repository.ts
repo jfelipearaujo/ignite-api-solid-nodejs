@@ -1,14 +1,14 @@
-import { Prisma, User } from '@prisma/client';
-import { UserRepository } from '../users-repository';
-import { randomUUID } from 'crypto';
+import { Prisma, User } from "@prisma/client";
+import { UserRepository } from "../users-repository";
+import { randomUUID } from "crypto";
 
 export class InMemoryUserRepository implements UserRepository {
     public items: User[] = [];
 
     async findById(id: string): Promise<User | null> {
-        const user = this.items.find(user => user.id === id);
+        const user = this.items.find((user) => user.id === id);
 
-        if(user) {
+        if (user) {
             return user;
         }
 
@@ -16,9 +16,9 @@ export class InMemoryUserRepository implements UserRepository {
     }
 
     async findByEmail(email: string) {
-        const user = this.items.find(user => user.email === email);
+        const user = this.items.find((user) => user.email === email);
 
-        if(user) {
+        if (user) {
             return user;
         }
 
