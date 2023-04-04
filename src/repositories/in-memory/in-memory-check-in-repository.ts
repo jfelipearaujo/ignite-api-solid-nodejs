@@ -6,6 +6,16 @@ import dayjs from "dayjs";
 export class InMemoryCheckInRepository implements CheckInRepository {
     public items: CheckIn[] = [];
 
+    async findById(id: string) {
+        const checkIn = this.items.find((c) => c.id === id);
+
+        if (!checkIn) {
+            return null;
+        }
+
+        return checkIn;
+    }
+
     async countByUserId(userId: string): Promise<number> {
         return this.items.filter((c) => c.user_id === userId).length;
     }
@@ -36,7 +46,7 @@ export class InMemoryCheckInRepository implements CheckInRepository {
 
     async create(data: Prisma.CheckInUncheckedCreateInput) {
         const checkIn = {
-            id: randomUUID(),
+            id: data.id ?? randomUUID(),
             user_id: data.user_id,
             gym_id: data.gym_id,
             validate_at: data.validate_at ? new Date(data.validate_at) : null,
@@ -45,6 +55,16 @@ export class InMemoryCheckInRepository implements CheckInRepository {
         };
 
         this.items.push(checkIn);
+
+        return checkIn;
+    }
+
+    async save(checkIn: CheckIn) {
+        const checkInIndex = this.items.findIndex((c) => c.id === checkIn.id);
+
+        if (checkInIndex >= 0) {
+            this.items[checkInIndex] = checkIn;
+        }
 
         return checkIn;
     }
