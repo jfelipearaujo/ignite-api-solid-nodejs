@@ -18,7 +18,7 @@ GymPass style app
 - [X] Should not be able to register users with the same e-mail address
 - [X] Should not allow users check-in more than once a day
 - [X] Should not allow users check-in if their is no gyms near their location (100m)
-- [ ] Should be able to allow check-in validation up to 20 minutes after creation
+- [X] Should be able to allow check-in validation up to 20 minutes after creation
 - [ ] Should be able to allow check-in validation only by administrators
 - [ ] Should be able to allow gym registration only by administrators
 

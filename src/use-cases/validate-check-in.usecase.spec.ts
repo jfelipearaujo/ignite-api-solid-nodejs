@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ValidateCheckInUseCase } from "./validate-check-in.usecase";
 import { InMemoryCheckInRepository } from "@/repositories/in-memory/in-memory-check-in-repository";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
+import { LateCheckInValidationError } from "./errors/late-check-in-validation-error";
 
 let repository: InMemoryCheckInRepository;
 let sut: ValidateCheckInUseCase;
@@ -47,5 +48,29 @@ describe("ValidateCheckInUseCase", () => {
                 checkInId: "non-existent-check-in-id",
             }),
         ).rejects.toBeInstanceOf(ResourceNotFoundError);
+    });
+
+    it("should not be able to validate user's check-in if exceed time limit", async () => {
+        // Arrange
+        vi.setSystemTime(new Date(2023, 0, 3, 13, 0, 0));
+
+        const checkInId = "check-in-id";
+
+        await repository.create({
+            id: checkInId,
+            user_id: "user-id",
+            gym_id: "gym-id",
+        });
+
+        const thirtyMinutesInMilliseconds = 1 * 1000 * 60 * 30;
+
+        vi.advanceTimersByTime(thirtyMinutesInMilliseconds);
+
+        // Act + Assert
+        await expect(() =>
+            sut.execute({
+                checkInId,
+            }),
+        ).rejects.toBeInstanceOf(LateCheckInValidationError);
     });
 });
