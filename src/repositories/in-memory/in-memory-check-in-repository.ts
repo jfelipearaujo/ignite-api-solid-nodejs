@@ -6,6 +6,10 @@ import dayjs from "dayjs";
 export class InMemoryCheckInRepository implements CheckInRepository {
     public items: CheckIn[] = [];
 
+    async countByUserId(userId: string): Promise<number> {
+        return this.items.filter((c) => c.user_id === userId).length;
+    }
+
     async findManyByUserId(userId: string, page: number) {
         return this.items
             .filter((c) => c.user_id === userId)
