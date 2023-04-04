@@ -5,6 +5,12 @@ import { randomUUID } from "crypto";
 export class InMemoryGymRepository implements GymRepository {
     public items: Gym[] = [];
 
+    async fetchMany(query: string, page: number): Promise<Gym[]> {
+        return this.items
+            .filter((g) => g.title.toLowerCase().includes(query.toLowerCase()))
+            .slice((page - 1) * 20, page * 20);
+    }
+
     async findById(id: string) {
         const gym = this.items.find((g) => g.id === id);
 
