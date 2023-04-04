@@ -8,7 +8,7 @@ GymPass style app
 - [X] Should be able to get logged user's profile
 - [X] Should be able to get logged user's check-ins number
 - [X] Should be able to get logged user's check-ins history
-- [ ] Should be able to get near gyms
+- [X] Should be able to get nearby gyms (10km)
 - [X] Should be able to find gyms by their name
 - [X] Should be able to check-in a user at a gym
 - [ ] Should be able to validate user's check-in
