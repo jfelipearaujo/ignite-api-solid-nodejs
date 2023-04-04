@@ -3,28 +3,27 @@ import { CheckInUseCase } from "./check-in-usecase";
 import { InMemoryCheckInRepository } from "@/repositories/in-memory/in-memory-check-in-repository";
 import { randomUUID } from "node:crypto";
 import { InMemoryGymRepository } from "@/repositories/in-memory/in-memory-gym-repository";
-import { Decimal } from "@prisma/client/runtime/library";
+import { MaxDistanceError } from "./errors/max-distance-error";
+import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins-error";
 
 let checkInRepository: InMemoryCheckInRepository;
 let gymRepository: InMemoryGymRepository;
 let sut: CheckInUseCase;
 
-const gymId = randomUUID();
+const gymId = "gym-id-1";
 
-beforeEach(() => {
+beforeEach(async () => {
     checkInRepository = new InMemoryCheckInRepository();
     gymRepository = new InMemoryGymRepository();
     sut = new CheckInUseCase(checkInRepository, gymRepository);
 
-    gymRepository.items.push({
+    await gymRepository.create({
         id: gymId,
         title: "Gym Title",
         description: "Gym Description",
         phone: "99 9 9999-9999",
-        latitude: new Decimal(0),
-        longitude: new Decimal(0),
-        create_at: new Date(),
-        updated_at: new Date(),
+        latitude: -22.8871799,
+        longitude: -46.9474326,
     });
 
     vi.useFakeTimers();
@@ -43,8 +42,8 @@ describe("CheckInUseCase", () => {
         const { checkIn } = await sut.execute({
             userId: randomUUID(),
             gymId,
-            userLatitude: 0,
-            userLongitude: 0,
+            userLatitude: -22.8871799,
+            userLongitude: -46.9474326,
         });
 
         // Assert
@@ -62,8 +61,8 @@ describe("CheckInUseCase", () => {
         await sut.execute({
             userId,
             gymId,
-            userLatitude: 0,
-            userLongitude: 0,
+            userLatitude: -22.8871799,
+            userLongitude: -46.9474326,
         });
 
         // Act + Assert
@@ -71,10 +70,10 @@ describe("CheckInUseCase", () => {
             sut.execute({
                 userId,
                 gymId,
-                userLatitude: 0,
-                userLongitude: 0,
+                userLatitude: -22.8871799,
+                userLongitude: -46.9474326,
             }),
-        ).rejects.toBeInstanceOf(Error);
+        ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError);
     });
 
     it("should be able to check in twice in different days", async () => {
@@ -86,8 +85,8 @@ describe("CheckInUseCase", () => {
         await sut.execute({
             userId,
             gymId,
-            userLatitude: 0,
-            userLongitude: 0,
+            userLatitude: -22.8871799,
+            userLongitude: -46.9474326,
         });
 
         vi.setSystemTime(new Date(2022, 0, 21, 8, 0, 0));
@@ -96,8 +95,8 @@ describe("CheckInUseCase", () => {
         const { checkIn } = await sut.execute({
             userId,
             gymId,
-            userLatitude: 0,
-            userLongitude: 0,
+            userLatitude: -22.8871799,
+            userLongitude: -46.9474326,
         });
 
         // Assert
@@ -106,16 +105,13 @@ describe("CheckInUseCase", () => {
 
     it("should not be able to check in at a gym that its far away", async () => {
         // Act
-        const farAwayGym = randomUUID();
-        gymRepository.items.push({
-            id: farAwayGym,
+        await gymRepository.create({
+            id: "gym-id-2",
             title: "Gym Title",
             description: "Gym Description",
             phone: "99 9 9999-9999",
-            latitude: new Decimal(-22.7682444),
-            longitude: new Decimal(-47.1599113),
-            create_at: new Date(),
-            updated_at: new Date(),
+            latitude: -22.7682444,
+            longitude: -47.1599113,
         });
 
         const date = new Date(2022, 0, 20, 8, 0, 0);
@@ -129,6 +125,6 @@ describe("CheckInUseCase", () => {
                 userLatitude: -22.8829504,
                 userLongitude: -46.9969626,
             }),
-        ).rejects.toBeInstanceOf(Error);
+        ).rejects.toBeInstanceOf(MaxDistanceError);
     });
 });

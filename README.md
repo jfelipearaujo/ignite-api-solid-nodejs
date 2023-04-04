@@ -12,7 +12,7 @@ GymPass style app
 - [ ] Should be able to find gyms by their name
 - [X] Should be able to check-in a user at a gym
 - [ ] Should be able to validate user's check-in
-- [ ] Should be able to register a gym
+- [X] Should be able to register a gym
 
 ## Business Rules
 - [X] Should not be able to register users with the same e-mail address

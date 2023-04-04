@@ -32,7 +32,7 @@ export class RegisterGymUseCase {
             longitude,
         });
 
-        if (gym) {
+        if (!gym) {
             throw new UserAlreadyExistsError();
         }
 
