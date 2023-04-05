@@ -12,7 +12,7 @@ describe("RegisterUserController", () => {
         await app.close();
     });
 
-    it("should be able to register a user", async () => {
+    it("should be able to register an user", async () => {
         // Arrange
         // Act
         const response = await request(app.server).post("/users").send({
