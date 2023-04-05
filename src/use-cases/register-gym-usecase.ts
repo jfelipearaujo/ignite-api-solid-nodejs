@@ -1,6 +1,8 @@
-import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
 import { Gym } from "@prisma/client";
+
 import { GymRepository } from "@/repositories/gym-repository";
+
+import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
 
 interface RegisterGymUseCaseRequest {
     title: string;

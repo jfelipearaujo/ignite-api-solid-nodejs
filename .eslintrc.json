@@ -5,7 +5,10 @@
     },
     "extends": [
         "standard",
-        "plugin:prettier/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:import/recommended",
+        "plugin:import/typescript"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -13,7 +16,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"        
     ],
     "rules": {
         "camelcase": "off",
@@ -33,6 +37,35 @@
                 "semi": true,
                 "endOfLine": "auto"
             }
+        ],       
+        "sort-imports":[
+            "error",
+            {
+                "ignoreCase": false,
+                "ignoreDeclarationSort": true,
+                "ignoreMemberSort": false,
+                "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+                "allowSeparatedGroups": true
+            }
+        ],
+        "import/no-unresolved": "error",
+        "import/order": [
+            "error",
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    ["sibling", "parent"],
+                    "index",
+                    "unknown"
+                ],
+                "newlines-between": "always",
+                "alphabetize": {
+                    "order": "asc",
+                    "caseInsensitive": true
+                }
+            }
         ]
     },
     "settings": {
@@ -40,6 +73,11 @@
             "@typescript-eslint/parser": [
                 ".ts"
             ]
+        },
+        "import/resolver": {
+            "typescript" : {
+                "project": "./tsconfig.json"
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
-import { create } from "./create";
+
 import { authenticate } from "./authenticate";
+import { create } from "./create";
 import { profile } from "./profile";
 import { verifyJwt } from "../../middlewares/verify-jwt";
 

@@ -1,8 +1,11 @@
-import { expect, describe, it, beforeEach, vi, afterEach } from "vitest";
-import { CheckInUseCase } from "./check-in-usecase";
-import { InMemoryCheckInRepository } from "@/repositories/in-memory/in-memory-check-in-repository";
 import { randomUUID } from "node:crypto";
+
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import { InMemoryCheckInRepository } from "@/repositories/in-memory/in-memory-check-in-repository";
 import { InMemoryGymRepository } from "@/repositories/in-memory/in-memory-gym-repository";
+
+import { CheckInUseCase } from "./check-in-usecase";
 import { MaxDistanceError } from "./errors/max-distance-error";
 import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins-error";
 

@@ -1,4 +1,5 @@
 import { PrismaGymRepository } from "@/repositories/prisma/prisma-gym-repository";
+
 import { FetchGymsUseCase } from "../fetch-gyms-usecase";
 
 export function makeFetchGymsUseCase() {

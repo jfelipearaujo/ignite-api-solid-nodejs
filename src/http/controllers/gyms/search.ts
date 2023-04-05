@@ -1,5 +1,6 @@
+import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { FastifyRequest, FastifyReply } from "fastify";
+
 import { makeFetchGymsUseCase } from "@/use-cases/factories/make-fetch-gyms-usecase";
 
 export async function search(request: FastifyRequest, reply: FastifyReply) {
