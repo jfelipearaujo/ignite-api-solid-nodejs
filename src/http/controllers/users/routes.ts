@@ -1,12 +1,12 @@
 import { FastifyInstance } from "fastify";
-import { registerUser } from "./create";
-import { authenticateUser } from "./authenticate";
-import { userProfile } from "./profile";
+import { create } from "./create";
+import { authenticate } from "./authenticate";
+import { profile } from "./profile";
 import { verifyJwt } from "../../middlewares/verify-jwt";
 
 export async function usersRoutes(app: FastifyInstance) {
-    app.post("/users", registerUser);
-    app.post("/sessions", authenticateUser);
+    app.post("/users", create);
+    app.post("/sessions", authenticate);
 
     /** Only for authenticated users */
     app.get(
@@ -14,6 +14,6 @@ export async function usersRoutes(app: FastifyInstance) {
         {
             onRequest: [verifyJwt],
         },
-        userProfile,
+        profile,
     );
 }

@@ -3,7 +3,7 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
 import { makeAuthenticateUserUseCase } from "@/use-cases/factories/make-authenticate-user-usecase";
 
-export async function authenticateUser(
+export async function authenticate(
     request: FastifyRequest,
     reply: FastifyReply,
 ) {
@@ -15,9 +15,9 @@ export async function authenticateUser(
     const { email, password } = authenticateUserSchema.parse(request.body);
 
     try {
-        const authenticateUseCase = makeAuthenticateUserUseCase();
+        const useCase = makeAuthenticateUserUseCase();
 
-        const { user } = await authenticateUseCase.execute({
+        const { user } = await useCase.execute({
             email,
             password,
         });
