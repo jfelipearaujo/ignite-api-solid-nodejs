@@ -4,6 +4,7 @@ import { z } from "zod";
 const envSchema = z.object({
     NODE_ENV: z.enum(["dev", "test", "prod"]),
     PORT: z.coerce.number(),
+    JWT_SECRET: z.string(),
 });
 
 const parseResult = envSchema.safeParse(process.env);

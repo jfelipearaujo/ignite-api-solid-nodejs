@@ -10,11 +10,16 @@ Content-Type: application/json
     "password":"123456"
 }
 
-### Register a new session
+### Authenticate
 POST {{url}}/sessions
 Content-Type: application/json
 
 {
     "email":"john.doe@email.com",
-    "password":"1234567"
+    "password":"123456"
 }
+
+### Get user profile
+GET {{url}}/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4Y2UyMTcxYy1jYzVjLTQzNjYtYTNmMi0yNmEyYmI0ZDIyOTciLCJpYXQiOjE2ODA2NTYyODl9.l4crfrXdslwFVPOsuY-6ID5U1CLdgEu6Hwq2R7DRmwY
