@@ -24,3 +24,31 @@ Content-Type: application/json
 GET {{url}}/me
 Content-Type: application/json
 Authorization: {{token}}
+
+### Create a gym
+POST {{url}}/gyms
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "title": "Gym Title",
+    "description": "Gym Description",
+    "phone": "99 9 9999-9999",
+    "latitude": -22.8871799,
+    "longitude": -46.9474326
+}
+
+### Create a check-in
+POST {{url}}/gyms/afcdbc32-014b-4ac0-8afd-5df80b8b7f81/check-ins
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "latitude": -22.8871799,
+    "longitude": -46.9474326
+}
+
+### Create a check-in
+GET {{url}}/check-ins/history
+Content-Type: application/json
+Authorization: {{token}}
