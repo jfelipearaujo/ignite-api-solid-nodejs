@@ -8,6 +8,6 @@ export interface FetchManyNearbyParams {
 export interface GymRepository {
     findById(id: string): Promise<Gym | null>;
     create(data: Prisma.GymCreateInput): Promise<Gym>;
-    fetchMany(query: string, poge: number): Promise<Gym[]>;
+    fetchMany(query: string, page: number): Promise<Gym[]>;
     fetchManyNearby(data: FetchManyNearbyParams): Promise<Gym[]>;
 }
