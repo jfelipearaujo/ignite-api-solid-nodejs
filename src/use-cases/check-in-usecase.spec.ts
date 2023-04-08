@@ -51,7 +51,7 @@ describe("CheckInUseCase", () => {
 
         // Assert
         expect(checkIn.id).toEqual(expect.any(String));
-        expect(checkIn.create_at).toEqual(date);
+        expect(checkIn.created_at).toEqual(date);
     });
 
     it("should not be able to check in twice a day", async () => {

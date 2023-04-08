@@ -52,7 +52,7 @@ export class InMemoryGymRepository implements GymRepository {
             phone: data.phone ?? null,
             latitude: new Prisma.Decimal(data.latitude.toString()),
             longitude: new Prisma.Decimal(data.longitude.toString()),
-            create_at: new Date(),
+            created_at: new Date(),
             updated_at: new Date(),
         };
 
