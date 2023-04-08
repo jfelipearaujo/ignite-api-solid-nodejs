@@ -1,5 +1,6 @@
 @url=http://localhost:3333
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4Y2UyMTcxYy1jYzVjLTQzNjYtYTNmMi0yNmEyYmI0ZDIyOTciLCJpYXQiOjE2ODA2NTYyODl9.l4crfrXdslwFVPOsuY-6ID5U1CLdgEu6Hwq2R7DRmwY
+@tokenMember=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4Y2UyMTcxYy1jYzVjLTQzNjYtYTNmMi0yNmEyYmI0ZDIyOTciLCJpYXQiOjE2ODA2NTYyODl9.l4crfrXdslwFVPOsuY-6ID5U1CLdgEu6Hwq2R7DRmwY
+@tokenAdmin=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJkOTQ1YWI5Ni1iMWUzLTRkZTMtODI4Mi04YmYzZDhhYjExZDEiLCJpYXQiOjE2ODA5ODExMDQsImV4cCI6MTY4MTU4NTkwNH0.CAboNPkjXXQsZUr9MwO20nGjSbE_J7Z8jF4HBS2dXq0
 
 ### Register a new user
 POST {{url}}/users
@@ -11,12 +12,31 @@ Content-Type: application/json
     "password":"123456"
 }
 
-### Authenticate
+### Register an admin user
+POST {{url}}/users
+Content-Type: application/json
+
+{
+    "name":"John Doe Admin",
+    "email":"john.doe.admin@email.com",
+    "password":"123456"
+}
+
+### Authenticate member
 POST {{url}}/sessions
 Content-Type: application/json
 
 {
     "email":"john.doe@email.com",
+    "password":"123456"
+}
+
+### Authenticate admin
+POST {{url}}/sessions
+Content-Type: application/json
+
+{
+     "email":"john.doe.admin@email.com",
     "password":"123456"
 }
 
@@ -32,12 +52,12 @@ Content-Type: application/json
 ### Get user profile
 GET {{url}}/me
 Content-Type: application/json
-Authorization: {{token}}
+Authorization: {{tokenMember}}
 
 ### Create a gym
 POST {{url}}/gyms
 Content-Type: application/json
-Authorization: {{token}}
+Authorization: {{tokenAdmin}}
 
 {
     "title": "Gym Title",
@@ -50,7 +70,7 @@ Authorization: {{token}}
 ### Create a check-in
 POST {{url}}/gyms/afcdbc32-014b-4ac0-8afd-5df80b8b7f81/check-ins
 Content-Type: application/json
-Authorization: {{token}}
+Authorization: {{tokenMember}}
 
 {
     "latitude": -22.8871799,
@@ -60,4 +80,4 @@ Authorization: {{token}}
 ### Create a check-in
 GET {{url}}/check-ins/history
 Content-Type: application/json
-Authorization: {{token}}
+Authorization: {{tokenMember}}
