@@ -1,6 +1,4 @@
-# App
-
-GymPass style app
+# GymPass Style App
 
 ## Functional Requirements
 - [X] Should be able to register a user
