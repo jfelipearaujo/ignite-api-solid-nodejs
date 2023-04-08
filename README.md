@@ -25,3 +25,4 @@
 - [X] The app data must be persisted in a PostgreSQL database
 - [X] All data returns must be paginated with 20 items per page
 - [X] The user must be identified by a JWT token
+- [X] The API routes must be tested against real scenarios
