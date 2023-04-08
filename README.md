@@ -19,11 +19,11 @@ GymPass style app
 - [X] Should not allow users check-in more than once a day
 - [X] Should not allow users check-in if their is no gyms near their location (100m)
 - [X] Should be able to allow check-in validation up to 20 minutes after creation
-- [ ] Should be able to allow check-in validation only by administrators
-- [ ] Should be able to allow gym registration only by administrators
+- [X] Should be able to allow check-in validation only by administrators
+- [X] Should be able to allow gym registration only by administrators
 
 ## Non-Functional Requirements
 - [X] The user's password must be encrypted
 - [X] The app data must be persisted in a PostgreSQL database
 - [X] All data returns must be paginated with 20 items per page
-- [ ] The user must be identified by a JWT token
+- [X] The user must be identified by a JWT token
