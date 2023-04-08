@@ -20,6 +20,15 @@ Content-Type: application/json
     "password":"123456"
 }
 
+### Refresh Token
+PATCH  {{url}}/token/refresh
+Content-Type: application/json
+
+{
+    "email":"john.doe@email.com",
+    "password":"123456"
+}
+
 ### Get user profile
 GET {{url}}/me
 Content-Type: application/json
